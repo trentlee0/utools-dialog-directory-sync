@@ -1,0 +1,19 @@
+{
+  "include": [
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "lib": [
+      "ES6",
+      "DOM"
+    ],
+    "removeComments": true,
+    "outDir": "./dist",
+    "types": [
+      "node",
+      "utools-api-types"
+    ]
+  }
+}

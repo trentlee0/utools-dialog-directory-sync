@@ -1,0 +1,42 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@types/node': ^18.11.7
+  '@vercel/ncc': ^0.36.1
+  prettier: ^2.8.8
+  utools-api-types: ^3.0.0
+  utools-utils: ^1.0.1
+
+dependencies:
+  utools-utils: 1.0.1
+
+devDependencies:
+  '@types/node': 18.11.7
+  '@vercel/ncc': 0.36.1
+  prettier: 2.8.8
+  utools-api-types: 3.0.0
+
+packages:
+
+  /@types/node/18.11.7:
+    resolution: {integrity: sha512-LhFTglglr63mNXUSRYD8A+ZAIu5sFqNJ4Y2fPuY7UlrySJH87rRRlhtVmMHplmfk5WkoJGmDjE9oiTfyX94CpQ==}
+    dev: true
+
+  /@vercel/ncc/0.36.1:
+    resolution: {integrity: sha512-S4cL7Taa9yb5qbv+6wLgiKVZ03Qfkc4jGRuiUQMQ8HGBD5pcNRnHeYM33zBvJE4/zJGjJJ8GScB+WmTsn9mORw==}
+    hasBin: true
+    dev: true
+
+  /prettier/2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
+  /utools-api-types/3.0.0:
+    resolution: {integrity: sha512-KJYytaX/cnxRTm+fBKeDAV6PhE1Emrv4bZm/6pigVhxEM4StAy8UFGyo22bVARSRIUUxbEdtWIo6O7qmEGnv5A==}
+    dev: true
+
+  /utools-utils/1.0.1:
+    resolution: {integrity: sha512-dNRacyhcR4d0wLQr/XhN+oVzasY+RqufcPakJO5Pk/yaAXgmIWBXS989DgI7StdfBjJ6n0XfOr+tro/BO/87yQ==}
+    dev: false
