@@ -1,0 +1,14 @@
+{
+  "pluginName": "对话框目录同步",
+  "author": "Trent0",
+  "homepage": "https://github.com/trentlee0/utools-dialog-directory-sync",
+  "description": "同步文件资源管理器、访达窗口的目录路径到文件对话框上，类似于 Listary 的 Ctrl + G 快速切换",
+  "version": "1.0.0",
+  "logo": "logo.png",
+  "preload": "preload.js",
+  "platform": [
+    "win32",
+    "darwin"
+  ],
+  "features": []
+}
