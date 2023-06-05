@@ -12,7 +12,7 @@ async function quickSwitchPathOnMacOs(
     end tell`
   let dirPath: string
   try {
-    const { stdout } = await execAppleScript(script)
+    const { stdout } = await execAppleScript(script, true)
     dirPath = stdout
   } catch (err) {
     dirPath = fallbackPath
