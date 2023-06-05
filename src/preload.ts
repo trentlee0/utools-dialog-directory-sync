@@ -29,14 +29,15 @@ async function quickSwitchPathOnWindows(
   fallbackPath: string
 ) {
   const script = `
+    chcp 65001
     $shell = New-Object -ComObject Wscript.Shell
     $app = New-Object -COM 'Shell.Application'
     $map = $app.Windows(0) | Select-Object LocationURL
-    $map.LocationURL`
+    Write-Output $map.LocationURL`
   let dirPath: string
   try {
     const { stdout } = await execPowerShell(script)
-    dirPath = stdout.trim() ? stdout : fallbackPath
+    dirPath = stdout.split('\r\n')[1] ?? fallbackPath
   } catch (err) {
     dirPath = fallbackPath
   }
