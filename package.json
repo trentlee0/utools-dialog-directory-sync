@@ -9,6 +9,6 @@
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "utools-utils": "^1.1.6"
+    "utools-utils": "^1.1.9"
   }
 }

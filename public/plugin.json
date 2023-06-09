@@ -29,6 +29,23 @@
           }
         }
       ]
+    },
+    {
+      "code": "switch-list",
+      "explain": "切换文件对话框目录",
+      "cmds": [
+        "切换对话框目录",
+        "Switch Dialog Directory",
+        {
+          "type": "window",
+          "label": "切换对话框目录",
+          "match": {
+            "class": [
+              "#32770"
+            ]
+          }
+        }
+      ]
     }
   ]
 }

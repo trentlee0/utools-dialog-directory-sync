@@ -4,11 +4,11 @@ specifiers:
   '@types/node': ^18.11.7
   prettier: ^2.8.8
   utools-api-types: ^3.0.0
-  utools-utils: ^1.1.6
+  utools-utils: ^1.1.9
   vite: ^4.3.9
 
 dependencies:
-  utools-utils: 1.1.6
+  utools-utils: 1.1.9
 
 devDependencies:
   '@types/node': 18.11.7
@@ -300,8 +300,8 @@ packages:
     resolution: {integrity: sha512-KJYytaX/cnxRTm+fBKeDAV6PhE1Emrv4bZm/6pigVhxEM4StAy8UFGyo22bVARSRIUUxbEdtWIo6O7qmEGnv5A==}
     dev: true
 
-  /utools-utils/1.1.6:
-    resolution: {integrity: sha512-tcXLXhpw/q+HEF1/VR4g5bhuF7VDbB3SPQIVx2lwY0vH1aA37MjPicRPFdV2VvlXXpFANFP2hC9DJ82GBKOysg==}
+  /utools-utils/1.1.9:
+    resolution: {integrity: sha512-VJt9aYz905qoJ806B2BF50CTnVtgmqg4pjxO0qP+gdWtZSPurAuY6CK87+LxSvMrPY9WEuBF1PfBI3oJbj2rvQ==}
     dev: false
 
   /vite/4.3.9_@types+node@18.11.7:
