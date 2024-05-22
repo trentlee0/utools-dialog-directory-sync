@@ -1,14 +1,15 @@
 {
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "watch": "vite build --watch"
   },
   "devDependencies": {
     "@types/node": "^18.11.7",
     "prettier": "^2.8.8",
-    "utools-api-types": "^3.0.0",
+    "utools-api-types": "^4.0.0",
     "vite": "^4.3.9"
   },
   "dependencies": {
-    "utools-utils": "^1.1.9"
+    "utools-utils": "^1.1.10"
   }
 }

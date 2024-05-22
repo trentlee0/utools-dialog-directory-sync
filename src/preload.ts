@@ -9,19 +9,60 @@ import {
 } from 'utools-utils'
 import { execPowerShell, execAppleScript } from 'utools-utils/preload'
 import { setTimeout } from 'timers/promises'
-import path = require('path')
+import * as path from 'path'
 
 const store = { focusInputDelay: 0.15, fallbackPath: utools.getPath('desktop') }
 
 async function switchDirectory(dirPath: string, focusInputDelay: number) {
+  dirPath = dirPath.trim()
   if (utools.isWindows()) {
+    const { stdout } = await execPowerShell(`Get-Clipboard`)
+    const oldClip = stdout.replace(/[\r\n]{1,2}$/, '')
     utools.simulateKeyboardTap('l', 'ctrl')
+    utools.copyText(dirPath)
+    await setTimeout(focusInputDelay * 1000)
+    utools.simulateKeyboardTap('v', 'ctrl')
+    utools.simulateKeyboardTap('enter')
+    utools.copyText(oldClip)
   } else {
-    utools.simulateKeyboardTap('g', 'command', 'shift')
+    const script = `
+      tell application "System Events"
+        set processName to name of first application process whose frontmost is true
+        keystroke "g" using {shift down, command down}
+        tell window 1 of process processName
+          set spendTime to 0
+          try
+            if splitter group 1 of sheet 1 exists then -- 文件保存框
+              repeat until (sheet 1 of sheet 1) exists
+                delay 0.01
+                set spendTime to spendTime + 1
+                if spendTime is greater than 30 then
+                  exit repeat
+                end if
+              end repeat
+              set value of text field 1 of sheet 1 of sheet 1 to "${dirPath}"
+            else -- 文件打开框
+              repeat until (text field 1 of sheet 1) exists
+                delay 0.02
+                set spendTime to spendTime + 1
+                if spendTime is greater than 15 then
+                  exit repeat
+                end if
+              end repeat
+              set value of text field 1 of sheet 1 to "${dirPath}"
+            end if
+            key code 76
+          on error
+            set oldClip to the clipboard
+            set the clipboard to "${dirPath}"
+            keystroke "v" using {command down}
+            key code 76
+            set the clipboard to oldClip
+          end
+        end tell
+      end tell`
+    await execAppleScript(script)
   }
-  await setTimeout(focusInputDelay * 1000)
-  utools.hideMainWindowTypeString(dirPath)
-  utools.simulateKeyboardTap('enter')
 }
 
 class Switch implements NoneTemplate {
@@ -51,7 +92,11 @@ class Switch implements NoneTemplate {
   }
 
   async enter() {
-    hideAndOutPlugin()
+    if (utools.isDev()) {
+      utools.hideMainWindow()
+    } else {
+      hideAndOutPlugin()
+    }
     const switchPath = await this.getQuickSwitchPath(store.fallbackPath)
     await switchDirectory(switchPath, store.focusInputDelay)
   }
@@ -59,6 +104,7 @@ class Switch implements NoneTemplate {
 
 class SwitchList implements MutableListTemplate {
   code = 'switch-list'
+  placeholder = '搜索已打开的目录，回车切换'
 
   async getOpenedPaths() {
     if (utools.isWindows()) {
@@ -98,16 +144,22 @@ class SwitchList implements MutableListTemplate {
       list.push(store.fallbackPath)
     }
     render(
-      list.map((item) => ({
-        title: path.basename(item),
-        description: item,
-        icon: utools.getFileIcon(item)
-      }))
+      list
+        .map((item) => decodeURI(item))
+        .map((item) => ({
+          title: path.basename(item),
+          description: item,
+          icon: utools.getFileIcon(item)
+        }))
     )
   }
 
   async select(action: Action, item: ListItem) {
-    hideAndOutPlugin()
+    if (utools.isDev()) {
+      utools.hideMainWindow()
+    } else {
+      hideAndOutPlugin()
+    }
     await switchDirectory(item.description, store.focusInputDelay)
   }
 }
